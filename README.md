@@ -2,25 +2,11 @@
 
 ## Overview
 
-This repository contains the principal analysis code for a study of cognitive
-measurement, population trends, and social inequalities using repeated China
-Health and Retirement Longitudinal Study (CHARLS) surveys and the 2018
-CHARLS Harmonized Cognitive Assessment Protocol (HCAP). The workflow constructs
-12 HCAP indicators, compares latent measurement models, evaluates education
-partial invariance, links routine CHARLS cognition to the HCAP metric, and
-estimates survey-weighted trends and inequalities. It also implements
-wave-specific multiple imputation, item-missingness and selection analyses,
-community-cluster bootstrap inference, attrition and mortality analyses, and
-internal validation of a research-use scoring model. The repository contains
-code only and does not include participant-level data or analysis outputs.
+This repository contains the principal analysis code for a study of cognitive measurement, population trends, and social inequalities using repeated China Health and Retirement Longitudinal Study (CHARLS) surveys and the 2018 CHARLS Harmonized Cognitive Assessment Protocol (HCAP). The workflow constructs 12 HCAP indicators, compares latent measurement models, evaluates partial measurement invariance across education groups, links routine CHARLS cognition to the HCAP metric, and estimates survey-weighted trends and social inequalities. It also implements wave-specific multiple imputation, item-missingness and selection analyses, community-cluster bootstrap inference, attrition and mortality analyses, and internal validation of a research-use scoring model. The repository contains code only and does not include participant-level data or analysis outputs.
 
 ## Data Availability
 
-CHARLS data are not included in this repository because they are subject to the
-data-use requirements of the original data provider. Researchers wishing to
-run the analyses must obtain the corresponding CHARLS data independently.
-The repository contains analysis code but does not redistribute
-participant-level CHARLS data.
+CHARLS data are not included in this repository because they are subject to the data-use requirements of the original data provider. Researchers wishing to run the analyses must obtain the corresponding CHARLS data independently. The repository contains analysis code but does not redistribute participant-level CHARLS data.
 
 By default, scripts expect authorized inputs under:
 
@@ -36,27 +22,25 @@ data/
 └── derived/                 # created locally; excluded from version control
 ```
 
-The `data/raw/` location can be overridden without editing code:
+The `data/raw/` location can be overridden without editing the code:
 
 ```bash
 export CHARLS_DATA_ROOT="/path/to/authorized/CHARLS/data"
 ```
 
-All raw files are read only. Participant-level model inputs are written to
-`data/derived/`, and numerical and graphical outputs are written to `results/`.
-Both directories are excluded from version control.
+All raw files are read only. Participant-level model inputs are written to `data/derived/`, and numerical and graphical outputs are written to `results/`. Both directories are excluded from version control.
 
 ## Code Structure
 
 | Script | Purpose |
-|---|---|
+| --- | --- |
 | `code/project_paths.py` | Defines repository-relative raw, derived, result, and temporary paths. |
 | `code/11_construct_hcap_indicators.py` | Constructs the 12 scored HCAP indicators and final `raeduc_c` education groups. |
 | `code/12_build_hcap_model_input.py` | Standardizes HCAP indicators and builds the local measurement-model input. |
 | `code/13_compare_hcap_measurement_models.R` | Compares one-factor, two-factor, and bifactor HCAP models using robust FIML. |
 | `code/14_test_education_measurement_invariance.R` | Tests metric and scalar invariance and estimates the education partial-invariance model. |
 | `code/16_hcap_all_missing_sensitivity.R` | Evaluates expanded-sample and lower-score scenarios for participants with all HCAP indicators missing. |
-| `code/20_prepare_longitudinal_cognition.py` | Builds the repeated cross-sectional routine-cognition input for 2011-2018. |
+| `code/20_prepare_longitudinal_cognition.py` | Builds the repeated cross-sectional routine-cognition input for 2011–2018. |
 | `code/21_estimate_calibrated_trends_inequalities.R` | Runs wave-specific imputation, HCAP-to-routine calibration, survey-weighted trends, inequalities, and principal sensitivity analyses. |
 | `code/22_hcap_item_mi_sensitivity.R` | Propagates HCAP item-level imputation through calibration and longitudinal estimation. |
 | `code/23_full_pipeline_cluster_bootstrap.R` | Refits the measurement-to-estimation pipeline in a community-cluster bootstrap. |
@@ -67,9 +51,7 @@ Both directories are excluded from version control.
 | `code/28_plot_workflow_missingness_sensitivity.R` | Produces workflow, HCAP missingness, and robustness displays. |
 | `code/29_build_main_tables.R` | Produces participant-characteristic and measurement/calibration summary tables. |
 
-The separate sensitivity scripts are retained because each reproduces a
-distinct reported analysis; exploratory and superseded scripts are not
-included.
+The separate sensitivity scripts are retained because each reproduces a distinct reported analysis; exploratory and superseded scripts are not included.
 
 ## Running the Analysis
 
@@ -99,18 +81,11 @@ Rscript code/28_plot_workflow_missingness_sensitivity.R
 Rscript code/29_build_main_tables.R
 ```
 
-`11_construct_hcap_indicators.py` defines the indicator-construction functions;
-`12_build_hcap_model_input.py` imports and executes them, so the first command
-performs both indicator construction and model-input preparation. The primary analysis uses 50
-imputations by default, and the full-pipeline bootstrap uses 200 replicates.
-Environment variables such as `B1_M`, `B1_MAXIT`, and `B1_BOOT_REPS` are
-available in the relevant scripts for local computational checks; the defaults
-correspond to the final analysis.
+`11_construct_hcap_indicators.py` defines the indicator-construction functions; `12_build_hcap_model_input.py` imports and executes them, so the first command performs both indicator construction and model-input preparation. The primary analysis uses 50 imputations by default, and the full-pipeline bootstrap uses 200 replicates. Environment variables such as `B1_M`, `B1_MAXIT`, and `B1_BOOT_REPS` are available in the relevant scripts for local computational checks; the defaults correspond to the final analysis.
 
 ## Software
 
-The analysis was run with Python 3.8.16 and R 4.1.3. Python dependencies are
-listed in `requirements.txt`.
+The analysis was run with Python 3.8.16 and R 4.1.3. Python dependencies are listed in `requirements.txt`.
 
 Principal R packages:
 
@@ -126,5 +101,4 @@ Principal R packages:
 - `ragg` 1.2.7
 - `svglite` 2.1.0
 
-The HCAP-linked score is a population research metric. It is not a clinical
-diagnostic instrument or an estimate of individual dementia probability.
+The HCAP-linked score is a population research metric. It is not a clinical diagnostic instrument or an estimate of individual dementia probability.
