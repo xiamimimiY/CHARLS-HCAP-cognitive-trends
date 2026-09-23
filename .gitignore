@@ -1,0 +1,27 @@
+# Restricted and participant-level data
+data/
+*.dta
+*.sav
+*.sas7bdat
+*.xpt
+*.parquet
+*.feather
+*.rds
+*.RData
+*.Rhistory
+*.zip
+
+# Locally produced analysis outputs
+results/
+scoring_tool/
+
+# Environments, caches, and logs
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.Rproj.user/
+.env
+*.log
+.DS_Store
